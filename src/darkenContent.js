@@ -65,14 +65,15 @@ const getSettings = (init) => {
     );
 };
 
-chrome.runtime.onMessage.addListener((message /*, sender, sendResponse */) => {
+getSettings(true);
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log("Received message '" + message + "'");
     if (message === "updateSettings") {
         getSettings();
         run();
     }
+    sendResponse({ success: true });
 });
 
 document.addEventListener("click", () => run("click"));
-
-getSettings(true);

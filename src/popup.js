@@ -12,12 +12,15 @@ const updateLabels = () => {
 };
 
 const sendUpdateRequest = () => {
-    chrome.tabs.query({ active: true }, function (tabs) {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         // chrome.runtime.sendMessage variant targets open extension pages, not content scripts in a given tab
         chrome.tabs.sendMessage(
             tabs[0].id,
             "updateSettings", // <- Could also be a JSON object, or anything JSON serializable
-            () => console.log("Sent updateSettings")
+            (response) => {
+                if (!chrome.runtime.lastError)
+                    console.log("Response:\n", response);
+            }
         );
     });
 };
@@ -32,6 +35,12 @@ toggle.addEventListener("click", () => {
 });
 
 intensityBar.addEventListener("input", (event) => {
+    console.log(event);
+    intensity = Number(event.target.value);
+    updateLabels();
+});
+
+intensityBar.addEventListener("change", (event) => {
     console.log(event);
     intensity = Number(event.target.value);
     chrome.storage.sync.set({ intensity: intensity }, () => {
