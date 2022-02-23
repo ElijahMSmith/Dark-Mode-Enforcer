@@ -1,0 +1,25 @@
+body {
+    width: 350px;
+    background: #2c2c2c;
+}
+
+div {
+    text-align: center;
+}
+
+#toggle,
+h2 {
+    display: inline-block;
+}
+
+#toggle {
+    width: 60px;
+    height: 60px;
+    background-color: rgb(133, 132, 72);
+    text-align: center;
+    margin-right: 20px;
+}
+
+* {
+    color: white;
+}

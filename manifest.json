@@ -1,0 +1,26 @@
+{
+    "name": "Dark Mode Enforcer",
+    "version": "1.0.0",
+    "description": "Dynamically darken pages that are too bright!",
+    "manifest_version": 3,
+    "permissions": ["storage"],
+    "content_scripts": [
+        {
+            "matches": ["*://*/*"],
+            "js": ["/src/tinyColor.js", "/src/darkenContent.js"],
+            "run_at": "document_end"
+        }
+    ],
+    "action": {
+        "default_popup": "/html/popup.html",
+        "default_icon": {
+            "48": "/assets/icon48.png",
+            "128": "/assets/icon128.png"
+        }
+    },
+    "icons": {
+        "48": "/assets/icon48.png",
+        "128": "/assets/icon128.png"
+    },
+    "options_page": "/html/options.html"
+}
